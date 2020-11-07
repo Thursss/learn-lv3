@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive, toRefs, computed, watch } from 'vue'
+import { ref, reactive, toRefs, computed, watch, Component } from 'vue'
+import Model from './components/Model.vue'
 import useMousePosition from '../hooks/useMousePosition'
 import userUrlLoading from '../hooks/userUrlLoading'
 
@@ -36,7 +37,6 @@ export default {
     watch(resData.count, (newVal, oldVal) => {
       console.log(oldVal + ' --- ' + newVal)
     })
-
     return { ...resData, x, y, res, loading, error }
   }
 }

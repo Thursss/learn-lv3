@@ -1,15 +1,33 @@
 <template>
   <HelloWorld />
+  <Model :isOpen="modelIsOpen" @close-model="closeModel">this is My moder</Model>
+  <button @click="openModel">打开</button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
+import Model from './components/Model.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Model
+  },
+  setup () {
+    const modelIsOpen = ref(false)
+    const openModel = () => {
+      modelIsOpen.value = true
+    }
+    const closeModel = () => {
+      modelIsOpen.value = false
+    }
+    return {
+      modelIsOpen,
+      openModel,
+      closeModel
+    }
   }
 })
 </script>
