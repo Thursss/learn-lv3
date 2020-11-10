@@ -4,14 +4,11 @@
     <h2>{{price}}</h2>
     <h3>x: {{x}} -- y: {{y}}</h3>
     <button @click="add">加加</button>
-    <h1 v-if="loading">loading</h1>
-    <img v-else :src="res.message" alt="">
   </div>
 </template>
 
 <script lang="ts">
-import { ref, reactive, toRefs, computed, watch, Component } from 'vue'
-import Model from './components/Model.vue'
+import { ref, reactive, toRefs, computed, watch } from 'vue'
 import useMousePosition from '../hooks/useMousePosition'
 import userUrlLoading from '../hooks/userUrlLoading'
 
