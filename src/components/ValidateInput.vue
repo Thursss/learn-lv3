@@ -1,7 +1,7 @@
 <template>
-  <div class="form-group row">
-    <label for="validationServer03" class="col-sm-2 col-form-label">邮箱</label>
-    <div class="col-sm-10">
+  <div class="form-group row mb-2">
+    <label for="validationServer03" class="col-sm-2 col-form-label">{{leadel}}</label>
+    <div class="col-sm-10  mb-1">
       <input
         class="form-control"
         id="validationServer03"
@@ -12,13 +12,14 @@
         @input="onInput"
       />
     </div>
+    <div class="text-danger" :class="{'d-block': inputRef.error}">{{inputRef.message}}</div>
   </div>
-  <div class="invalid-feedback" :style="{'display: block': inputRef.error}">{{inputRef.message}}</div>
 </template>
 
 <script lang='ts'>
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { defineComponent, reactive, PropType } from 'vue'
+import { formEmitter } from './components'
 
 interface RuleProp {
   type: 'requires' | 'email' | 'min' | 'max' | 'phone';
@@ -33,7 +34,8 @@ export type RulesProp = RuleProp[]
 export default defineComponent({
   props: {
     rule: Array as PropType<RulesProp>,
-    modelValue: String
+    modelValue: String,
+    leadel: String
   },
   inheritAttrs: false,
   setup (props, context) {
@@ -44,7 +46,7 @@ export default defineComponent({
     })
 
     const validetaInput = () => {
-      if (!props || !props.rule) { return }
+      if (!props || !props.rule) { return true }
 
       const allPassed = props.rule.every(rule => {
         let passed = true
@@ -71,6 +73,9 @@ export default defineComponent({
         return passed
       })
       inputRef.error = !allPassed
+      formEmitter.emit('form-item-created', allPassed)
+
+      return allPassed
     }
 
     const onInput = (e: KeyboardEvent) => {
@@ -78,11 +83,19 @@ export default defineComponent({
       inputRef.val = targetVal
       context.emit('update:modelValue', targetVal)
     }
+
+    formEmitter.on('form-submit', (isValidate) => {
+      if (isValidate) validetaInput()
+    })
+
     return {
       inputRef,
       validetaInput,
       onInput
     }
+  },
+  unmounted () {
+    formEmitter.off('form-submit', this.validetaInput)
   }
 })
 </script>
