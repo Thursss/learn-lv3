@@ -17,9 +17,8 @@
 </template>
 
 <script lang='ts'>
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { defineComponent, reactive, PropType } from 'vue'
-import { formEmitter } from './components'
+import { formEmitter } from '../components'
 
 interface RuleProp {
   type: 'requires' | 'email' | 'min' | 'max' | 'phone';

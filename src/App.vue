@@ -1,18 +1,22 @@
 <template>
   <div class="container">
-    <form-test />
+    <!-- <form-test /> -->
+    <router-test />
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import FormTest from './learn/form.vue'
+// import FormTest from './learn/form.vue'
+import RouterTest from './learn/router/router.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    FormTest
+    // FormTest,
+    RouterTest
   }
 })
 </script>
