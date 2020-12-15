@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <form class="form-horizontal">
-      <slot name="default"></slot>
-      <button
-        type="button"
-        class="btn btn-primary btn-lg"
-        :disabled="!isPassed"
-        @click="submitForm"
-      >
-        <slot name="submit">
-          <span>提交</span>
-        </slot>
-      </button>
-    </form>
-  </div>
+  <form class="form-horizontal">
+    <slot name="default"></slot>
+    <button
+      type="button"
+      class="btn btn-primary btn-lg"
+      :disabled="!isPassed"
+      @click="submitForm"
+    >
+      <slot name="submit">
+        <span>提交</span>
+      </slot>
+    </button>
+  </form>
 </template>
 
 <script lang="ts">
@@ -25,9 +23,10 @@ export default defineComponent({
   setup () {
     const isPassed = ref(true)
     const submitForm = () => {
-      emitter.emit('form-submit', true)
+      emitter.emit('form-submit', isPassed.value)
     }
-    const callBack = (ispassed: any) => {
+    const callBack = (ispassed?: boolean) => {
+      if (ispassed === undefined) return
       isPassed.value = ispassed
     }
 

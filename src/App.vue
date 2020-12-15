@@ -1,22 +1,20 @@
 <template>
-  <div class="container">
-    <!-- <form-test /> -->
-    <router-test />
-    <router-view />
-  </div>
+  <v-header />
+  <router-view />
+  <v-footer />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
-// import FormTest from './learn/form.vue'
-import RouterTest from './learn/router/router.vue'
+import { defineComponent } from 'vue'
+import VHeader from 'views/Header.vue'
+import VFooter from 'views/Footer.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    // FormTest,
-    RouterTest
+    VHeader,
+    VFooter
   }
 })
 </script>
@@ -28,6 +26,5 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

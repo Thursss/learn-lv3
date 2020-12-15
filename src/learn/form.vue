@@ -13,7 +13,7 @@
 <script lang='ts'>
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { defineComponent, ref } from 'vue'
-import { ValidateInput, ValidateForm, formRulesProp } from '../components/components'
+import { ValidateInput, ValidateForm, formRulesProp } from 'components/exports'
 
 export default defineComponent({
   components: {

@@ -1,14 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import RouterTest from './learn/router/test.vue'
+import Learn from 'learn/App-L.vue'
+import Login from 'views/Login.vue'
 
 const routerHistory = createWebHistory()
 const router = createRouter({
   history: routerHistory,
   routes: [
     {
-      path: '/router-test/:id',
-      name: 'router-test',
-      component: RouterTest
+      path: '/',
+      name: 'app-learn',
+      component: Learn
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })

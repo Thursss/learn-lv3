@@ -1,23 +1,20 @@
 <template>
-  <div>
-    <router-link to="/" class="btn btn-lg mb-2">首页</router-link>
-    <div @click="click" style="display: block" class="btn btn-primary btn-lg">=====></div>
+  <div class="container">
+    <h1>router</h1>
+    <h2>
+      <pre>{{ route }}</pre>
+    </h2>
   </div>
 </template>
 
 <script lang='ts'>
+import { useRoute } from 'vue-router'
 import { defineComponent } from 'vue'
-import { useRouter } from 'vue-router'
-
 export default defineComponent({
   setup () {
-    const router = useRouter()
-    const click = () => {
-      router.push('/router-test/11')
-    }
-
+    const route = useRoute()
     return {
-      click
+      route
     }
   }
 })

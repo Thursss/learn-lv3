@@ -12,21 +12,22 @@
         @input="onInput"
       />
     </div>
-    <div class="text-danger" :class="{'d-block': inputRef.error}">{{inputRef.message}}</div>
+    <div class="text-danger" :class="{'d-none': !inputRef.error}">{{inputRef.message}}</div>
   </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, reactive, PropType } from 'vue'
-import { formEmitter } from '../components'
+import { formEmitter } from 'components/exports'
 
 interface RuleProp {
-  type: 'requires' | 'email' | 'min' | 'max' | 'phone';
+  type: 'requires' | 'email' | 'min' | 'max' | 'phone' | 'password';
   message: string;
 }
 
 const emailReg = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/
 const phoneReg = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/
+const passwordReg = /^[a-zA-Z]\w{5,17}$/
 
 export type RulesProp = RuleProp[]
 
@@ -45,25 +46,29 @@ export default defineComponent({
     })
 
     const validetaInput = () => {
-      if (!props || !props.rule) { return true }
+      if (!props || !props.rule) return true
 
-      const allPassed = props.rule.every(rule => {
+      const allPassed: boolean = props.rule.every(rule => {
         let passed = true
+        const val = inputRef.val.trim()
         switch (rule.type) {
           case 'requires':
-            passed = (inputRef.val.trim() !== '')
+            passed = (val !== '')
             break
           case 'min':
-            passed = (inputRef.val.trim().length >= 6)
+            passed = (val.length >= 6)
             break
           case 'max':
-            passed = (inputRef.val.trim().length <= 26)
+            passed = (val.length <= 26)
+            break
+          case 'password':
+            passed = (passwordReg.test(val))
             break
           case 'phone':
-            passed = phoneReg.test(inputRef.val)
+            passed = phoneReg.test(val)
             break
           case 'email':
-            passed = emailReg.test(inputRef.val)
+            passed = emailReg.test(val)
             break
           default:
             break
@@ -72,8 +77,7 @@ export default defineComponent({
         return passed
       })
       inputRef.error = !allPassed
-      formEmitter.emit('form-item-created', allPassed)
-
+      formEmitter.emit<boolean>('form-item-created', allPassed)
       return allPassed
     }
 
@@ -83,8 +87,8 @@ export default defineComponent({
       context.emit('update:modelValue', targetVal)
     }
 
-    formEmitter.on('form-submit', (isValidate) => {
-      if (isValidate) validetaInput()
+    formEmitter.on('form-submit', () => {
+      validetaInput()
     })
 
     return {
@@ -93,6 +97,9 @@ export default defineComponent({
       onInput
     }
   },
+  // mounted () {
+  //   formEmitter.emit('form-item-created', this.validetaInput)
+  // },
   unmounted () {
     formEmitter.off('form-submit', this.validetaInput)
   }
