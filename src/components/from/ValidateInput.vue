@@ -48,9 +48,9 @@ export default defineComponent({
     const validetaInput = () => {
       if (!props || !props.rule) return true
 
+      const val = inputRef.val.trim()
       const allPassed: boolean = props.rule.every(rule => {
         let passed = true
-        const val = inputRef.val.trim()
         switch (rule.type) {
           case 'requires':
             passed = (val !== '')
@@ -77,8 +77,10 @@ export default defineComponent({
         return passed
       })
       inputRef.error = !allPassed
-      formEmitter.emit<boolean>('form-item-created', allPassed)
-      return allPassed
+      return {
+        isPassed: allPassed,
+        val: val
+      }
     }
 
     const onInput = (e: KeyboardEvent) => {
@@ -87,21 +89,17 @@ export default defineComponent({
       context.emit('update:modelValue', targetVal)
     }
 
-    formEmitter.on('form-submit', () => {
-      validetaInput()
-    })
-
     return {
       inputRef,
       validetaInput,
       onInput
     }
   },
-  // mounted () {
-  //   formEmitter.emit('form-item-created', this.validetaInput)
-  // },
+  mounted () {
+    formEmitter.emit<Function>('form-item-created', this.validetaInput)
+  },
   unmounted () {
-    formEmitter.off('form-submit', this.validetaInput)
+    formEmitter.off<Function>('form-submit', this.validetaInput)
   }
 })
 </script>

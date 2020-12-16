@@ -1,7 +1,7 @@
 <template>
   <div class="login-page mx-auto p-3 w-330">
     <validate-form>
-      <validate-input :leadel="'账号'" :rule="accountInput" />
+      <validate-input :leadel="'邮箱'" :rule="accountInput" />
       <validate-input :leadel="'密码'" :rule="passWordInput" />
     </validate-form>
   </div>
@@ -34,8 +34,11 @@ export default defineComponent({
     ValidateInput
   },
   setup () {
-    const onSubmit = (isPassed?: boolean) => {
-      console.log(isPassed)
+    const onSubmit = (inputData?: object[]) => {
+      if (inputData === undefined || inputData.length <= 0) return
+      inputData.forEach((data) => {
+        console.log((data as any).val)
+      })
     }
     formEmitter.on('form-submit', onSubmit)
     return {

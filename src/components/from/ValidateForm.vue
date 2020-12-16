@@ -18,16 +18,28 @@
 import { defineComponent, ref } from 'vue'
 import mitt from 'mitt'
 
+type validetaInputFunc = () => object
+
 export const emitter = mitt()
 export default defineComponent({
   setup () {
     const isPassed = ref(true)
+    const validetaInputArr: validetaInputFunc[] = []
+
     const submitForm = () => {
-      emitter.emit('form-submit', isPassed.value)
+      const inputData = validetaInputArr.map((func) => {
+        return func()
+      })
+      const isAllPassed = inputData.every((res) => {
+        return (res as any).isPassed
+      })
+      if (!isAllPassed) return
+
+      emitter.emit<object[]>('form-submit', inputData)
     }
-    const callBack = (ispassed?: boolean) => {
-      if (ispassed === undefined) return
-      isPassed.value = ispassed
+    const callBack = (func?: validetaInputFunc) => {
+      if (func === undefined) return
+      validetaInputArr.push(func)
     }
 
     emitter.on('form-item-created', callBack)
