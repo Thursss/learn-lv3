@@ -2,7 +2,7 @@
   <div class="login-page mx-auto p-3 w-330">
     <validate-form>
       <validate-input :leadel="'邮箱'" :rule="accountInput" />
-      <validate-input :leadel="'密码'" :rule="passWordInput" />
+      <validate-input type="password" :leadel="'密码'" :rule="passWordInput" />
     </validate-form>
   </div>
 </template>
@@ -10,6 +10,9 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 import { ValidateForm, ValidateInput, inputRulesProp, formEmitter } from 'components/exports'
+import { GlobalDataProps } from '@/store'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 const accountInput: inputRulesProp = [
   {
@@ -34,11 +37,16 @@ export default defineComponent({
     ValidateInput
   },
   setup () {
+    const store = useStore<GlobalDataProps>()
+    const router = useRouter()
+
     const onSubmit = (inputData?: object[]) => {
       if (inputData === undefined || inputData.length <= 0) return
-      inputData.forEach((data) => {
-        console.log((data as any).val)
-      })
+      store.commit('login', (inputData[0] as any).val)
+      router.push('/')
+      // inputData.forEach((data) => {
+      //   console.log((data as any).val)
+      // })
     }
     formEmitter.on('form-submit', onSubmit)
     return {
