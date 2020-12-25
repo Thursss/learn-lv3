@@ -25,10 +25,10 @@ const accountInput: inputRulesProp = [
   }
 ]
 const passWordInput: inputRulesProp = [
-  {
-    type: 'password',
-    message: '请输入正确的密码'
-  }
+  // {
+  //   type: 'password',
+  //   message: '请输入正确的密码'
+  // }
 ]
 
 export default defineComponent({
@@ -39,6 +39,7 @@ export default defineComponent({
   setup () {
     const store = useStore<GlobalDataProps>()
     const router = useRouter()
+    const loading = store.state.loading
 
     const onSubmit = (inputData?: object[]) => {
       if (inputData === undefined || inputData.length <= 0) return
@@ -52,7 +53,8 @@ export default defineComponent({
     return {
       accountInput,
       passWordInput,
-      onSubmit
+      onSubmit,
+      loading
     }
   },
   unmounted () {

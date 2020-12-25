@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 
 type userProps = {
   isLogin: boolean;
+  loading: boolean;
   id?: string;
   name?: string;
   image?: string;
@@ -16,6 +17,7 @@ const store = createStore<GlobalDataProps>({
   state: {
     loading: false,
     user: {
+      loading: false,
       isLogin: false
     }
   },
@@ -30,10 +32,11 @@ const store = createStore<GlobalDataProps>({
       store.user.name = ''
     },
     setLoading (store, loading) {
-      store.loading = loading
+      store.user.loading = loading
     }
   },
-  actions: {},
+  actions: {
+  },
   getters: {}
 })
 
