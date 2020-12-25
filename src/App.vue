@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
 import { defineComponent } from 'vue'
 import VHeader from 'views/Header.vue'
 import VFooter from 'views/Footer.vue'

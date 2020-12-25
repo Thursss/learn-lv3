@@ -13,7 +13,7 @@
 <script lang='ts'>
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { defineComponent, ref } from 'vue'
-import { ValidateInput, ValidateForm, formRulesProp } from 'components/exports'
+import { ValidateInput, ValidateForm, inputRulesProp } from 'components/exports'
 
 export default defineComponent({
   components: {
@@ -22,7 +22,7 @@ export default defineComponent({
   },
   setup () {
     const emailVal = ref('')
-    const emailRules: formRulesProp = [
+    const emailRules: inputRulesProp = [
       {
         type: 'requires',
         message: '电子邮箱不能为空'

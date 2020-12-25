@@ -1,7 +1,7 @@
 <template>
   <div class="form-group row mb-2">
     <label for="validationServer03" class="col-sm-2 col-form-label">{{leadel}}</label>
-    <div class="col-sm-10  mb-1">
+    <div class="col-sm-10 mb-1">
       <input
         class="form-control"
         id="validationServer03"
@@ -10,7 +10,6 @@
         v-bind="$attrs"
         @blur="validetaInput"
         @input="onInput"
-
       />
     </div>
     <div class="text-danger" :class="{'d-none': !inputRef.error}">{{inputRef.message}}</div>
