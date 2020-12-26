@@ -13,6 +13,7 @@ import { ValidateForm, ValidateInput, inputRulesProp, formEmitter } from 'compon
 import { GlobalDataProps } from '@/store'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import Loading from 'components/Loading.vue'
 
 const accountInput: inputRulesProp = [
   {
@@ -43,8 +44,9 @@ export default defineComponent({
 
     const onSubmit = (inputData?: object[]) => {
       if (inputData === undefined || inputData.length <= 0) return
-      store.commit('login', (inputData[0] as any).val)
-      router.push('/')
+      // store.commit('login', (inputData[0] as any).val)
+      store.commit('setLoading', true)
+      // router.push('/')
       // inputData.forEach((data) => {
       //   console.log((data as any).val)
       // })
@@ -53,8 +55,7 @@ export default defineComponent({
     return {
       accountInput,
       passWordInput,
-      onSubmit,
-      loading
+      onSubmit
     }
   },
   unmounted () {

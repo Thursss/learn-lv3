@@ -1,7 +1,7 @@
 <template>
-  <p>{{loading}}</p>
+  <p>{{loading.isOpen}}</p>
   <router-test />
-  <v-Loading v-if="loading" :type="'加载中...'" />
+  <v-Loading v-if="loading.isOpen" :type="'加载中...'"/>
 </template>
 
 <script lang="ts">
@@ -21,20 +21,20 @@ export default defineComponent({
   },
   setup () {
     const store = useStore<GlobalDataProps>()
-    const loading = store.state.user.isLogin
+    const loading = store.state.loading
     return {
       loading,
       store
     }
+  },
+  mounted  () {
+    axios.get('http://console.xhj.com/api/search/?text=雨花&newHouse=false&cityId=1&houseType=11').then(res => {
+      console.log(res)
+    })
+    setTimeout(() => {
+      console.log(this.loading)
+    }, 3000)
   }
-  // mounted  () {
-  //   axios.get('http://console.xhj.com/api/search/?text=雨花&newHouse=false&cityId=1&houseType=11').then(res => {
-  //     console.log(res)
-  //   })
-  //   setTimeout(() => {
-  //     console.log(this.loading)
-  //   }, 3000)
-  // }
 })
 </script>
 

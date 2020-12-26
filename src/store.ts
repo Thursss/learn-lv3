@@ -8,14 +8,20 @@ type userProps = {
   image?: string;
 }
 
+type loadingProps = {
+  isOpen: boolean;
+}
+
 export interface GlobalDataProps {
-  loading: boolean;
+  loading: loadingProps;
   user: userProps;
 }
 
 const store = createStore<GlobalDataProps>({
   state: {
-    loading: false,
+    loading: {
+      isOpen: false
+    },
     user: {
       loading: false,
       isLogin: false
@@ -31,8 +37,8 @@ const store = createStore<GlobalDataProps>({
       store.user.isLogin = false
       store.user.name = ''
     },
-    setLoading (store, loading) {
-      store.user.loading = loading
+    setLoading (store, isOpen) {
+      store.loading.isOpen = isOpen
     }
   },
   actions: {

@@ -9,13 +9,13 @@ const app = createApp(App)
 // axios设置
 axios.defaults.baseURL = ''
 axios.interceptors.request.use(config => {
-  store.commit('login', 'true')
+  store.commit('setLoading', true)
   return config
 })
 axios.interceptors.response.use(config => {
   setTimeout(() => {
     store.commit('logout')
-    // store.commit('setLoading', false)
+    store.commit('setLoading', false)
   }, 2000)
   return config
 })

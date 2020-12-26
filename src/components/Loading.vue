@@ -2,7 +2,7 @@
   <teleport to="#loading">
     <div
       class="d-flex justify-content-center loading-container"
-      :style="{backgroudColor: backgroud || ''}"
+      :style="{backgroundColor: background || ''}"
     >
       <div class="align-items-center m-auto text-center">
         <div class="spinner-border text-primary" role="status"></div>
@@ -18,15 +18,15 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   props: {
     type: String,
-    backgroud: String
+    background: String
   },
   setup (prop) {
-    console.log(prop.type)
+    console.log(prop.type || 'ss')
   }
 })
 </script>
 
-<style lang='scss'>
+<style>
 .loading-container {
   position: fixed;
   top: 0;
