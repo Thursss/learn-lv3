@@ -3,7 +3,6 @@ import axios from 'axios'
 import store from '@/store'
 import Learn from 'learn/App-L.vue'
 import Login from 'views/Login.vue'
-import { toRefs } from 'vue'
 
 const routerHistory = createWebHistory()
 const router = createRouter({
@@ -17,19 +16,39 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        noRequiredLogin: true
+      }
     }
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/login' && store.state.user.isLogin) {
-//     next(false)
-//   } else if (to.path !== '/login') {
-//     next('/login')
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  const { requiredLogin, noRequiredLogin } = to.meta
+  const { user, token } = store.state
+  if (!user.isLogin) {
+    if (token) {
+      store.commit('login', { name: '17300792864', token: token })
+      if (noRequiredLogin) {
+        next('/')
+      } else {
+        next()
+      }
+    } else {
+      if (requiredLogin) {
+        next('login')
+      } else {
+        next()
+      }
+    }
+  } else {
+    if (noRequiredLogin) {
+      next('/')
+    } else {
+      next()
+    }
+  }
+})
 
 export default router

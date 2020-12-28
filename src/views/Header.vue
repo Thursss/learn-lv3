@@ -32,19 +32,17 @@
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from '@/store'
-// import Loading from 'components/Loading.vue'
 
 export default defineComponent({
-  // components: {
-  //   Loading
-  // },
+  props: {
+    user: Object
+  },
   setup () {
     const store = useStore<GlobalDataProps>()
     const logout = () => {
       store.commit('logout')
     }
     return {
-      user: store.state.user,
       logout
     }
   }

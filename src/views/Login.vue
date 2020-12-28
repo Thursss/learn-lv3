@@ -20,6 +20,10 @@ const accountInput: inputRulesProp = [
     type: 'requires',
     message: '请输入账号'
   },
+  // {
+  //   type: 'email',
+  //   message: '请输入正确的账号'
+  // },
   {
     type: 'min',
     message: '请输入正确的账号'
@@ -40,16 +44,14 @@ export default defineComponent({
   setup () {
     const store = useStore<GlobalDataProps>()
     const router = useRouter()
-    const loading = store.state.loading
 
     const onSubmit = (inputData?: object[]) => {
       if (inputData === undefined || inputData.length <= 0) return
-      // store.commit('login', (inputData[0] as any).val)
-      store.commit('setLoading', true)
-      // router.push('/')
-      // inputData.forEach((data) => {
-      //   console.log((data as any).val)
-      // })
+      store.commit('login', { name: (inputData[0] as any).val, token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMTczMDA3OTI4NjQiLCJwYXciOjExMTExMX0.8RRkjc70SqDdMSE7vNm1BKdsjzdbzfaGahH8wnkwXrw' })
+      router.push('/')
+      inputData.forEach((data) => {
+        console.log((data as any).val)
+      })
     }
     formEmitter.on('form-submit', onSubmit)
     return {

@@ -1,5 +1,5 @@
 <template>
-  <teleport to="#loading">
+  <!-- <teleport to="#loading"> -->
     <div
       class="d-flex justify-content-center loading-container"
       :style="{backgroundColor: background || ''}"
@@ -9,7 +9,7 @@
         <span v-if="type" class="sr-only d-block text-primary font-weight-bold mt-1">{{type}}</span>
       </div>
     </div>
-  </teleport>
+  <!-- </teleport> -->
 </template>
 
 <script lang='ts'>
@@ -21,14 +21,14 @@ export default defineComponent({
     background: String
   },
   setup (prop) {
-    console.log(prop.type || 'ss')
+    console.log(prop.type)
   }
 })
 </script>
 
 <style>
 .loading-container {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 9999;

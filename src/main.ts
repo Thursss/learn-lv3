@@ -14,10 +14,13 @@ axios.interceptors.request.use(config => {
 })
 axios.interceptors.response.use(config => {
   setTimeout(() => {
-    store.commit('logout')
     store.commit('setLoading', false)
-  }, 2000)
+  }, 1000)
   return config
+}, e => {
+  store.commit('setLoading', false)
+  console.error(e)
+  return Promise.reject(e)
 })
 
 app.use(router)
