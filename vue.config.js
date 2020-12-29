@@ -8,7 +8,9 @@ module.exports = {
         assets: '@/assets',
         components: '@/components',
         learn: '@/learn',
-        views: '@/views'
+        views: '@/views',
+        visualization: '@/visualization',
+        performance: '@/performance'
       }
     }
   }

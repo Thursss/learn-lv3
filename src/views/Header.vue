@@ -29,13 +29,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { useStore } from 'vuex'
-import { GlobalDataProps } from '@/store'
+import { GlobalDataProps, UserProps } from '@/store'
 
 export default defineComponent({
   props: {
-    user: Object
+    user: Object as PropType<UserProps>
   },
   setup () {
     const store = useStore<GlobalDataProps>()

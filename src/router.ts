@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import axios from 'axios'
 import store from '@/store'
-import Learn from 'learn/App-L.vue'
+import Container from 'views/Container.vue'
 import Login from 'views/Login.vue'
+import { performanceLearn } from 'performance/exports'
+import { visualizationLearn } from 'visualization/exports'
 
 const routerHistory = createWebHistory()
 const router = createRouter({
@@ -10,8 +12,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'app-learn',
-      component: Learn
+      name: 'container',
+      component: Container
     },
     {
       path: '/login',
@@ -20,6 +22,16 @@ const router = createRouter({
       meta: {
         noRequiredLogin: true
       }
+    },
+    {
+      path: '/performance',
+      name: 'performance',
+      component: performanceLearn
+    },
+    {
+      path: '/visualization',
+      name: 'visualization',
+      component: visualizationLearn
     }
   ]
 })
@@ -29,7 +41,7 @@ router.beforeEach((to, from, next) => {
   const { user, token } = store.state
   if (!user.isLogin) {
     if (token) {
-      store.commit('login', { name: '17300792864', token: token })
+      store.commit('login', { name: user.name, token: token })
       if (noRequiredLogin) {
         next('/')
       } else {

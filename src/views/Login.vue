@@ -20,20 +20,24 @@ const accountInput: inputRulesProp = [
     type: 'requires',
     message: '请输入账号'
   },
-  // {
-  //   type: 'email',
-  //   message: '请输入正确的账号'
-  // },
+  {
+    type: 'email',
+    message: '请输入正确的账号'
+  },
   {
     type: 'min',
     message: '请输入正确的账号'
   }
 ]
 const passWordInput: inputRulesProp = [
-  // {
-  //   type: 'password',
-  //   message: '请输入正确的密码'
-  // }
+  {
+    type: 'password',
+    message: '请输入正确的密码'
+  },
+  {
+    type: 'min',
+    message: '请输入正确的账号'
+  }
 ]
 
 export default defineComponent({

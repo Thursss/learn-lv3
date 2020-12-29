@@ -28,6 +28,12 @@
       "views/*": [
         "src/views/*"
       ],
+      "visualization/*": [
+        "src/visualization/*"
+      ],
+      "performance/*": [
+        "src/performance/*"
+      ],
     },
     "lib": [
       "esnext",
