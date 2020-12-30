@@ -1,11 +1,16 @@
 <template>
- <div>{{effectiveType}}</div>
+  <div>{{ttt}}</div>
+  <Suspense>
+    <RowList />
+  </Suspense>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onErrorCaptured, ref } from 'vue'
+import RowList from 'performance/RowList.vue'
 
 export default defineComponent({
+  components: { RowList },
   setup () {
     // 页面可见性的状态监听
     const visibilityEvent = (document as any).webkitHidden ? 'webkitvisibilitychange' : 'visibilitychange'

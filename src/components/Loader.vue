@@ -19,9 +19,6 @@ export default defineComponent({
   props: {
     type: String,
     background: String
-  },
-  setup (prop) {
-    console.log(prop.type)
   }
 })
 </script>
