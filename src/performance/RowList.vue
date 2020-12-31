@@ -6,9 +6,9 @@
         v-for="performanceItem in performanceRow"
         :key="performanceItem.stressId"
       >
-        <div class="card h-100" :style="performanceItem.stressId === '1275' ? `width: ${width};` : ''">
+        <div class="card h-100">
           <div class="img-box overflow-hidden">
-            <img :src="performanceItem.thumb" class="card-img-top" alt="..." />
+            <img :src="performanceItem.thumb" class="card-img-top"  :style="performanceItem.stressId === '1275' ? `width: ${width}px;` : ''" alt="..." />
           </div>
           <div class="card-body text-left">
             <h4 class="card-title">{{performanceItem.name}}</h4>
@@ -26,24 +26,28 @@ import { getPerformanceRow } from '@/network'
 
 export default defineComponent({
   setup () {
-    const width = ref('')
+    const width = ref(null)
     const performanceRow = ref(null)
     getPerformanceRow({
       cityId: '1',
       pageFrom: 1,
-      pageSize: 12
+      pageSize: 10
     }).then(res => {
       performanceRow.value = res
     })
+    const updataWidth = (t) => {
+      width.value = t / 10
+      const r = window.requestAnimationFrame(updataWidth)
+      if (width.value >= 100) { window.cancelAnimationFrame(r) }
+    }
     return {
       performanceRow,
+      updataWidth,
       width
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.width = '300px'
-    }, 2000)
+    this.updataWidth()
   }
 })
 </script>
