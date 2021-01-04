@@ -1,8 +1,6 @@
 <template>
   <div>{{ttt}}</div>
-  <Suspense>
-    <RowList />
-  </Suspense>
+  <RowList />
 </template>
 
 <script lang="ts">
