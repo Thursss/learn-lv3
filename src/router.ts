@@ -3,6 +3,7 @@ import axios from 'axios'
 import store from '@/store'
 import Container from 'views/Container.vue'
 import Login from 'views/Login.vue'
+import htmlLayout from '@/nothing/layout/index.vue'
 import { performanceLearn } from 'performance/exports'
 import { visualizationLearn } from 'visualization/exports'
 
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/visualization',
       name: 'visualization',
       component: visualizationLearn
+    },
+    {
+      path: '/htmlLayout',
+      name: 'htmlLayout',
+      component: htmlLayout
     }
   ]
 })

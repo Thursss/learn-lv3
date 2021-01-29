@@ -11,10 +11,11 @@
         <div class="card h-100">
           <div class="img-box overflow-hidden">
             <img
-              :src="performanceItem.thumb"
+              loading="lazy"
               class="card-img-top animate__animated animate__infinite"
-              :class="{'animate__flipInY': animateArr.includes(performanceItem.stressId), 'willpage': performanceItem.stressId === '1275'}"
               alt="..."
+              :src="performanceItem.thumb"
+              :class="{'animate__flipInY': animateArr.includes(performanceItem.stressId), 'willpage': performanceItem.stressId === '1275'}"
             />
           </div>
           <div class="card-body text-left">
@@ -39,7 +40,7 @@ export default defineComponent({
     getPerformanceRow({
       cityId: '1',
       pageFrom: 1,
-      pageSize: 10
+      pageSize: 100
     }).then((res) => {
       performanceRow.value = res
     })
@@ -89,5 +90,22 @@ export default defineComponent({
   bottom: 0;
   right: 0;
   margin: auto;
+}
+@keyframes awid {
+  0% {
+    width: 300px;
+  }
+  50% {
+    width: 0;
+  }
+  100% {
+    width: 300px;
+  }
+}
+.animate__widget {
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  -webkit-animation-name: awid;
+  animation-name: awid;
 }
 </style>
