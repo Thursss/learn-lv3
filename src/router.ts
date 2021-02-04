@@ -4,6 +4,7 @@ import store from '@/store'
 import Container from 'views/Container.vue'
 import Login from 'views/Login.vue'
 import htmlLayout from '@/nothing/layout/index.vue'
+import _Test from '@/nothing/_test/index.vue'
 import { performanceLearn } from 'performance/exports'
 import { visualizationLearn } from 'visualization/exports'
 
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/htmlLayout',
       name: 'htmlLayout',
       component: htmlLayout
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: _Test
     }
   ]
 })
