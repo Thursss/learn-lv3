@@ -1,6 +1,6 @@
 <template>
   <div v-for="(i, index) in menuLength" :key="`item-${index}`">
-    {{i}}- -- {{index}}
+    {{i}}  --  {{index}}
   </div>
 </template>
 

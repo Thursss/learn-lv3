@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import axios from 'axios'
 import store from '@/store'
-import Container from 'views/Container.vue'
-import Login from 'views/Login.vue'
-import htmlLayout from '@/nothing/layout/index.vue'
-import _Test from '@/nothing/_test/index.vue'
+// import Container from 'views/Container.vue'
+// import Login from 'views/Login.vue'
+// import Nothing from '@/nothing/index.vue'
+// import htmlLayout from '@/nothing/layout/index.vue'
+// import _Test from '@/nothing/_test/index.vue'
 import { performanceLearn } from 'performance/exports'
 import { visualizationLearn } from 'visualization/exports'
 
@@ -14,36 +14,53 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'container',
-      component: Container
+      name: 'Container',
+      component: import('views/Container.vue')
     },
     {
       path: '/login',
-      name: 'login',
-      component: Login,
+      name: 'Login',
+      component: import('views/Login.vue'),
       meta: {
         noRequiredLogin: true
       }
     },
     {
       path: '/performance',
-      name: 'performance',
+      name: 'Performance',
       component: performanceLearn
     },
     {
       path: '/visualization',
-      name: 'visualization',
+      name: 'Visualization',
       component: visualizationLearn
     },
     {
-      path: '/htmlLayout',
-      name: 'htmlLayout',
-      component: htmlLayout
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: _Test
+      path: '/nothing',
+      name: 'Nothing',
+      component: import('@/nothing/index.vue'),
+      children: [
+        {
+          path: 'htmlLayout',
+          name: 'HtmlLayout',
+          component: import('@/nothing/layout/index.vue')
+        },
+        {
+          path: 'test',
+          name: 'Test',
+          component: import('@/nothing/_test/index.vue')
+        },
+        {
+          path: 'vueLifeCycle',
+          name: 'VueLifeCycle',
+          component: import('@/nothing/vueLifeCycle/index.vue')
+        },
+        {
+          path: 'componenCommunication',
+          name: 'ComponenCommunication',
+          component: import('@/nothing/componenCommunication/index.vue')
+        }
+      ]
     }
   ]
 })
