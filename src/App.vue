@@ -27,11 +27,23 @@ export default defineComponent({
     loading: (vm) => vm.store.state.loading,
     user: (vm) => vm.store.state.user
   },
+  methods: {
+    onError (error: Event) {
+      console.error(error)
+    }
+  },
   setup () {
     const store = useStore<GlobalDataProps>()
     return {
       store
     }
+  },
+  created () {
+    // 监听错误事件
+    window.addEventListener('error', this.onError, true)
+  },
+  beforeUnmount () {
+    window.removeEventListener('error', this.onError)
   }
 })
 </script>

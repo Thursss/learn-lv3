@@ -16,6 +16,7 @@
             aria-expanded="false"
           >你好 {{ user.name }}</button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <router-link to="/nothing" class="btn btn-outline-light my-2 dropdown-item">nothing</router-link>
             <a class="dropdown-item" @click="logout" href="#">退出登录</a>
           </div>
         </li>

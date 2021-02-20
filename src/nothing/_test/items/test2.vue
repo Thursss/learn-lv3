@@ -42,8 +42,8 @@ export default defineComponent({
         console.log(this.name)
         console.log(_this.name)
         // (function () {
-          // console.log(_this)
-          // console.log(this)
+        //   console.log(_this)
+        //   console.log(this)
         // })()
       },
     }
