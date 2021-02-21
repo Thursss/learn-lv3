@@ -1,9 +1,9 @@
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const externals = {
-  'vue': 'Vue',
+  vue: 'Vue',
   'vue-router': 'VueRouter',
-  'vuex': 'Vuex',
-  'axios': 'axios'
+  vuex: 'Vuex',
+  axios: 'axios'
 }
 
 const cdn = {
@@ -37,7 +37,7 @@ module.exports = {
   },
   chainWebpack: config => {
     // let UglifyPlugin = require('uglifyjs-webpack-plugin');
-    if (process.env.use_analyzer) {     // 分析
+    if (process.env.use_analyzer) { // 分析
       config
         .plugin('webpack-bundle-analyzer')
         .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)

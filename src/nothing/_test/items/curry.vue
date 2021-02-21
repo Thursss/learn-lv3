@@ -16,15 +16,17 @@ export default defineComponent({
     },
     currying (fn) {
       const args = Array.prototype.slice.call(arguments, 1)
+      console.log(fn.length)
     },
     add (x) {
-      console.log(arguments)
+      console.log(x)
     }
   },
   mounted () {
     const sum = this.curryItem(1)(2)(3)
-    this.add(1, 2)
-    console.log('柯里化：' + sum)
+    // this.add(1, 2)
+    // console.log('柯里化：' + this.currying(this.add(1, 2)))
+    this.currying(this.add)
   }
 })
 </script>
