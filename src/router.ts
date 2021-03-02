@@ -1,10 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store'
-// import Container from 'views/Container.vue'
-// import Login from 'views/Login.vue'
-// import Nothing from '@/nothing/index.vue'
-// import htmlLayout from '@/nothing/layout/index.vue'
-// import _Test from '@/nothing/_test/index.vue'
 import { performanceLearn } from 'performance/exports'
 import { visualizationLearn } from 'visualization/exports'
 
@@ -15,6 +10,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Container',
+      redirect: '/nothing',
       component: import('views/Container.vue')
     },
     {
@@ -59,7 +55,12 @@ const router = createRouter({
           path: 'componenCommunication',
           name: 'ComponenCommunication',
           component: import('@/nothing/componenCommunication/index.vue')
-        }
+        },
+        {
+          path: 'classExtent',
+          name: 'ClassExtent',
+          component: import('@/nothing/classExtent/index.vue')
+        },
       ]
     }
   ]

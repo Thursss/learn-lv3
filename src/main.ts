@@ -16,6 +16,7 @@ axios.interceptors.request.use(config => {
   store.commit('setLoading', true)
   return config
 })
+
 axios.interceptors.response.use(config => {
   setTimeout(() => {
     store.commit('setLoading', false)
@@ -28,5 +29,5 @@ axios.interceptors.response.use(config => {
 })
 
 app.use(router)
-app.use(store)
-app.mount('#app')
+  .use(store)
+  .mount('#app')

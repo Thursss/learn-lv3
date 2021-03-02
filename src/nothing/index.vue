@@ -4,6 +4,7 @@
     <router-link to='/nothing/test' class="link">test</router-link>
     <router-link to='/nothing/vueLifeCycle' class="link">vue生命周期</router-link>
     <router-link to='/nothing/componenCommunication' class="link">组件通信</router-link>
+    <router-link to='/nothing/classExtent' class="link">继承</router-link>
     <router-view />
   </div>
 </template>
